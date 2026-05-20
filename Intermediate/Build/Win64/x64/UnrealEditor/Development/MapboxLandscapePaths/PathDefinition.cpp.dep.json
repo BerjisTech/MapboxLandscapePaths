@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "f:\\airmuseum\\plugins\\mapboxlandscapepaths\\source\\mapboxlandscapepaths\\private\\pathdefinition.cpp",
+        "ProvidedModule": "",
+        "PCH": "f:\\airmuseum\\intermediate\\build\\win64\\x64\\airmuseumeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.valexpapi.cpp20.h.pch",
+        "Includes": [
+            "f:\\airmuseum\\plugins\\mapboxlandscapepaths\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\mapboxlandscapepaths\\definitions.mapboxlandscapepaths.h",
+            "f:\\airmuseum\\plugins\\mapboxlandscapepaths\\source\\mapboxlandscapepaths\\public\\pathdefinition.h",
+            "f:\\airmuseum\\plugins\\mapboxlandscapepaths\\intermediate\\build\\win64\\unrealeditor\\inc\\mapboxlandscapepaths\\uht\\pathdefinition.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

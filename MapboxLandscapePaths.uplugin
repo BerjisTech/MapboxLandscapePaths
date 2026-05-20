@@ -1,0 +1,30 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "0.1",
+	"FriendlyName": "Mapbox Landscape Paths",
+	"Description": "Adds road-following mission paths, A* routing, and minimap overlays on top of the MapboxLandscape plugin. Requires MapboxLandscape (uses its API key and coordinate system).",
+	"Category": "Landscape",
+	"CreatedBy": "Airmuseum",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": true,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "MapboxLandscapePaths",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "MapboxLandscape",
+			"Enabled": true
+		}
+	]
+}

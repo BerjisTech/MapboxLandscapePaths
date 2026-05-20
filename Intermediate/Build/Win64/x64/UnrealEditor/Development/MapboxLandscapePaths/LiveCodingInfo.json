@@ -1,0 +1,18 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.MapboxLandscapePaths.cpp.obj": [
+			"MapboxLandscapePaths.init.gen.cpp.obj",
+			"MissionPathActor.gen.cpp.obj",
+			"MissionPathLibrary.gen.cpp.obj",
+			"PathDefinition.gen.cpp.obj",
+			"RoadGraphAsset.gen.cpp.obj",
+			"PerModuleInline.gen.cpp.obj",
+			"MapboxLandscapePaths.cpp.obj",
+			"MissionPathActor.cpp.obj",
+			"MissionPathLibrary.cpp.obj",
+			"PathDefinition.cpp.obj",
+			"RoadGraphAsset.cpp.obj"
+		]
+	}
+}

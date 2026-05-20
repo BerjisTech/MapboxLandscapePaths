@@ -1,0 +1,28 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "f:\\airmuseum\\plugins\\mapboxlandscapepaths\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\mapboxlandscapepaths\\module.mapboxlandscapepaths.cpp",
+        "ProvidedModule": "",
+        "PCH": "f:\\airmuseum\\intermediate\\build\\win64\\x64\\airmuseumeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.valexpapi.cpp20.h.pch",
+        "Includes": [
+            "f:\\airmuseum\\plugins\\mapboxlandscapepaths\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\mapboxlandscapepaths\\definitions.mapboxlandscapepaths.h",
+            "f:\\airmuseum\\plugins\\mapboxlandscapepaths\\intermediate\\build\\win64\\unrealeditor\\inc\\mapboxlandscapepaths\\uht\\mapboxlandscapepaths.init.gen.cpp",
+            "f:\\airmuseum\\plugins\\mapboxlandscapepaths\\intermediate\\build\\win64\\unrealeditor\\inc\\mapboxlandscapepaths\\uht\\missionpathactor.gen.cpp",
+            "f:\\airmuseum\\plugins\\mapboxlandscapepaths\\source\\mapboxlandscapepaths\\public\\missionpathactor.h",
+            "f:\\airmuseum\\plugins\\mapboxlandscapepaths\\intermediate\\build\\win64\\unrealeditor\\inc\\mapboxlandscapepaths\\uht\\missionpathactor.generated.h",
+            "f:\\airmuseum\\plugins\\mapboxlandscapepaths\\intermediate\\build\\win64\\unrealeditor\\inc\\mapboxlandscapepaths\\uht\\missionpathlibrary.gen.cpp",
+            "f:\\airmuseum\\plugins\\mapboxlandscapepaths\\source\\mapboxlandscapepaths\\public\\missionpathlibrary.h",
+            "f:\\airmuseum\\plugins\\mapboxlandscapepaths\\intermediate\\build\\win64\\unrealeditor\\inc\\mapboxlandscapepaths\\uht\\missionpathlibrary.generated.h",
+            "f:\\airmuseum\\plugins\\mapboxlandscapepaths\\intermediate\\build\\win64\\unrealeditor\\inc\\mapboxlandscapepaths\\uht\\pathdefinition.gen.cpp",
+            "f:\\airmuseum\\plugins\\mapboxlandscapepaths\\source\\mapboxlandscapepaths\\public\\pathdefinition.h",
+            "f:\\airmuseum\\plugins\\mapboxlandscapepaths\\intermediate\\build\\win64\\unrealeditor\\inc\\mapboxlandscapepaths\\uht\\pathdefinition.generated.h",
+            "f:\\airmuseum\\plugins\\mapboxlandscapepaths\\intermediate\\build\\win64\\unrealeditor\\inc\\mapboxlandscapepaths\\uht\\roadgraphasset.gen.cpp",
+            "f:\\airmuseum\\plugins\\mapboxlandscapepaths\\source\\mapboxlandscapepaths\\public\\roadgraphasset.h",
+            "f:\\airmuseum\\plugins\\mapboxlandscapepaths\\intermediate\\build\\win64\\unrealeditor\\inc\\mapboxlandscapepaths\\uht\\roadgraphasset.generated.h",
+            "f:\\airmuseum\\plugins\\mapboxlandscapepaths\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\mapboxlandscapepaths\\permoduleinline.gen.cpp",
+            "d:\\epic games\\ue_5.7\\engine\\source\\runtime\\core\\public\\hal\\permoduleinline.inl"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
