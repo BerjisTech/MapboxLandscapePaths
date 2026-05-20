@@ -1,0 +1,17 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-MapboxLandscapePaths.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"F:/Airmuseum/Intermediate/Build/Win64/x64/UnrealEditor/Development/UnrealEd/SharedPCH.UnrealEd.Project.ValApi.ValExpApi.Cpp20.h.obj"
+"F:/Airmuseum/Plugins/MapboxLandscapePaths/Intermediate/Build/Win64/x64/UnrealEditor/Development/MapboxLandscapePaths/Module.MapboxLandscapePaths.cpp.obj"
+"F:/Airmuseum/Plugins/MapboxLandscapePaths/Intermediate/Build/Win64/x64/UnrealEditor/Development/MapboxLandscapePaths/MapboxLandscapePaths.cpp.obj"
+"F:/Airmuseum/Plugins/MapboxLandscapePaths/Intermediate/Build/Win64/x64/UnrealEditor/Development/MapboxLandscapePaths/MissionPathActor.cpp.obj"
+"F:/Airmuseum/Plugins/MapboxLandscapePaths/Intermediate/Build/Win64/x64/UnrealEditor/Development/MapboxLandscapePaths/MissionPathLibrary.cpp.obj"
+"F:/Airmuseum/Plugins/MapboxLandscapePaths/Intermediate/Build/Win64/x64/UnrealEditor/Development/MapboxLandscapePaths/PathDefinition.cpp.obj"
+"F:/Airmuseum/Plugins/MapboxLandscapePaths/Intermediate/Build/Win64/x64/UnrealEditor/Development/MapboxLandscapePaths/RoadGraphAsset.cpp.obj"
+"F:/Airmuseum/Plugins/MapboxLandscapePaths/Intermediate/Build/Win64/x64/UnrealEditor/Development/MapboxLandscapePaths/Default.rc2.res"
+/OUT:"F:/Airmuseum/Plugins/MapboxLandscapePaths/Intermediate/Build/Win64/x64/UnrealEditor/Development/MapboxLandscapePaths/UnrealEditor-MapboxLandscapePaths.lib"
