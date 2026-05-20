@@ -8,7 +8,6 @@ class USceneComponent;
 class USplineComponent;
 class URoadGraphAsset;
 class UPathDefinition;
-class AMapboxLandscapeActor;
 
 UCLASS()
 class MAPBOXLANDSCAPEPATHS_API AMissionPathActor : public AActor
@@ -45,9 +44,6 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Path|Output", meta = (ToolTip = "If set, Compute writes the resulting polyline into this asset. Create with right-click > Miscellaneous > Data Asset > PathDefinition."))
 	TSoftObjectPtr<UPathDefinition> OutputAsset;
 
-	UPROPERTY(EditAnywhere, Category = "Path|Alignment", meta = (ToolTip = "Attach this actor to the first MapboxLandscapeActor in the level so moving the landscape moves the path."))
-	bool bAttachToMapboxLandscape = true;
-
 	UPROPERTY(VisibleAnywhere, Category = "Path|Result")
 	int32 LastResultPointCount = 0;
 
@@ -60,17 +56,6 @@ public:
 	UFUNCTION(CallInEditor, Category = "Path|Actions")
 	void ClearResult();
 
-	UFUNCTION(CallInEditor, Category = "Path|Actions", meta = (ToolTip = "Attaches this actor to the active MapboxLandscape actor. Useful if you moved the landscape and want the path to follow."))
-	void AlignToMapboxLandscape();
-
-protected:
-	virtual void OnConstruction(const FTransform& Transform) override;
-
-#if WITH_EDITOR
-	virtual void PostEditChangeProperty(FPropertyChangedEvent& E) override;
-#endif
-
 private:
 	void RebuildSplineFromPoints(const TArray<FVector>& Points);
-	AMapboxLandscapeActor* FindMapboxLandscape() const;
 };

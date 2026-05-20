@@ -3,12 +3,10 @@
 #include "MissionPathLibrary.h"
 #include "RoadGraphAsset.h"
 #include "PathDefinition.h"
-#include "MapboxLandscapeActor.h"
 
 #include "Components/SceneComponent.h"
 #include "Components/SplineComponent.h"
 #include "Engine/World.h"
-#include "EngineUtils.h"
 
 #if WITH_EDITOR
 #include "AssetRegistry/AssetRegistryModule.h"
@@ -24,7 +22,6 @@ DEFINE_LOG_CATEGORY_STATIC(LogMapboxPathActor, Log, All);
 AMissionPathActor::AMissionPathActor()
 {
 	PrimaryActorTick.bCanEverTick = false;
-	bIsEditorOnlyActor = false;
 
 	SceneRoot = CreateDefaultSubobject<USceneComponent>(TEXT("SceneRoot"));
 	RootComponent = SceneRoot;
@@ -42,59 +39,6 @@ AMissionPathActor::AMissionPathActor()
 	ResultSpline->ClearSplinePoints(false);
 	ResultSpline->SetClosedLoop(false);
 	ResultSpline->bDrawDebug = true;
-}
-
-AMapboxLandscapeActor* AMissionPathActor::FindMapboxLandscape() const
-{
-	if (!GetWorld()) return nullptr;
-	for (TActorIterator<AMapboxLandscapeActor> It(GetWorld()); It; ++It) return *It;
-	return nullptr;
-}
-
-void AMissionPathActor::OnConstruction(const FTransform& Transform)
-{
-	Super::OnConstruction(Transform);
-	if (bAttachToMapboxLandscape && GetAttachParentActor() == nullptr)
-	{
-		AlignToMapboxLandscape();
-	}
-}
-
-#if WITH_EDITOR
-void AMissionPathActor::PostEditChangeProperty(FPropertyChangedEvent& E)
-{
-	Super::PostEditChangeProperty(E);
-	if (E.GetPropertyName() == GET_MEMBER_NAME_CHECKED(AMissionPathActor, bAttachToMapboxLandscape))
-	{
-		if (bAttachToMapboxLandscape) AlignToMapboxLandscape();
-		else DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-	}
-}
-#endif
-
-void AMissionPathActor::AlignToMapboxLandscape()
-{
-	AMapboxLandscapeActor* Mapbox = FindMapboxLandscape();
-	if (!Mapbox)
-	{
-#if WITH_EDITOR
-		FNotificationInfo Info(FText::FromString(TEXT("No MapboxLandscape actor in this level. Place one and configure its coordinates first.")));
-		Info.ExpireDuration = 6.f;
-		Info.bUseLargeFont = false;
-		TSharedPtr<SNotificationItem> Item = FSlateNotificationManager::Get().AddNotification(Info);
-		if (Item.IsValid()) Item->SetCompletionState(SNotificationItem::CS_Fail);
-#endif
-		return;
-	}
-
-	AttachToActor(Mapbox, FAttachmentTransformRules::KeepWorldTransform);
-
-#if WITH_EDITOR
-	FNotificationInfo Info(FText::FromString(FString::Printf(TEXT("Attached to %s. The path will follow if you move the landscape."), *Mapbox->GetActorLabel())));
-	Info.ExpireDuration = 4.f;
-	Info.bUseLargeFont = false;
-	FSlateNotificationManager::Get().AddNotification(Info);
-#endif
 }
 
 void AMissionPathActor::RebuildSplineFromPoints(const TArray<FVector>& Points)
@@ -125,7 +69,7 @@ void AMissionPathActor::ComputePath()
 	if (!GraphAsset || GraphAsset->Nodes.IsEmpty())
 	{
 #if WITH_EDITOR
-		FNotificationInfo Info(FText::FromString(TEXT("Mapbox Paths: no Road Graph assigned, or it's empty. Bake one via the MissionPathLibrary first.")));
+		FNotificationInfo Info(FText::FromString(TEXT("Mapbox Paths: no Road Graph assigned, or it's empty. Bake one via Tools > Mapbox Landscape > Bake Mapbox Road Graph first.")));
 		Info.ExpireDuration = 8.f;
 		TSharedPtr<SNotificationItem> Item = FSlateNotificationManager::Get().AddNotification(Info);
 		if (Item.IsValid()) Item->SetCompletionState(SNotificationItem::CS_Fail);

@@ -2,7 +2,8 @@
 
 #include "RoadGraphAsset.h"
 #include "PathDefinition.h"
-#include "MapboxLandscapeActor.h"
+#include "MapboxImporterConfig.h"
+#include "MapboxImporterEditorSubsystem.h"
 #include "MapboxLandscapeSettings.h"
 
 #include "Engine/Engine.h"
@@ -81,8 +82,8 @@ namespace
 		return R * C;
 	}
 
-	// Mirror of AMapboxLandscapeActor::ResolveBoundingBox + PickAutoZoom + tile enumeration.
-	static bool ResolveBBoxAndTiles(const AMapboxLandscapeActor* Actor,
+	// Mirror of UMapboxImporterConfig::ResolveBoundingBox + PickAutoZoom + tile enumeration.
+	static bool ResolveBBoxAndTiles(const UMapboxImporterConfig* Actor,
 	                                 double& N, double& S, double& E, double& W,
 	                                 int32& Z, int32& MinTX, int32& MinTY, int32& MaxTX, int32& MaxTY)
 	{
@@ -124,7 +125,7 @@ namespace
 
 		if (N <= S || E <= W) return false;
 
-		// Auto-zoom mirror (matches AMapboxLandscapeActor::PickAutoZoom).
+		// Auto-zoom mirror (matches UMapboxImporterConfig::PickAutoZoom).
 		const double DegSide = FMath::Max(N - S, (E - W) * FMath::Cos(FMath::DegreesToRadians((N + S) * 0.5)));
 		if (Actor->bAutoZoom)
 		{
@@ -157,22 +158,18 @@ FMapboxLandscapeContext UMissionPathLibrary::GetActiveMapboxContext(const UObjec
 	UWorld* World = GEngine ? GEngine->GetWorldFromContextObject(WorldContextObject, EGetWorldErrorMode::LogAndReturnNull) : nullptr;
 	if (!World) return Ctx;
 
-	AMapboxLandscapeActor* Actor = nullptr;
-	for (TActorIterator<AMapboxLandscapeActor> It(World); It; ++It)
+	UMapboxImporterEditorSubsystem* Sub = UMapboxImporterEditorSubsystem::Get();
+	UMapboxImporterConfig* Cfg = Sub ? Sub->GetConfig() : nullptr;
+	if (!Cfg)
 	{
-		Actor = *It;
-		break;
-	}
-	if (!Actor)
-	{
-		UE_LOG(LogMapboxPaths, Warning, TEXT("No AMapboxLandscapeActor found in level. Place one and configure its coordinates before baking paths."));
+		UE_LOG(LogMapboxPaths, Warning, TEXT("No active Mapbox importer config. Open Tools > Mapbox Landscape > Open Landscape Importer and configure coordinates before baking paths."));
 		return Ctx;
 	}
 
 	double N, S, E, W; int32 Z, MinTX, MinTY, MaxTX, MaxTY;
-	if (!ResolveBBoxAndTiles(Actor, N, S, E, W, Z, MinTX, MinTY, MaxTX, MaxTY))
+	if (!ResolveBBoxAndTiles(Cfg, N, S, E, W, Z, MinTX, MinTY, MaxTX, MaxTY))
 	{
-		UE_LOG(LogMapboxPaths, Warning, TEXT("MapboxLandscape actor has invalid coordinate configuration."));
+		UE_LOG(LogMapboxPaths, Warning, TEXT("Mapbox importer has invalid coordinate configuration."));
 		return Ctx;
 	}
 
@@ -184,14 +181,14 @@ FMapboxLandscapeContext UMissionPathLibrary::GetActiveMapboxContext(const UObjec
 	const int32 TilesY = MaxTY - MinTY + 1;
 
 	Ctx.bValid = true;
-	Ctx.MapboxActor = Actor;
+	Ctx.ImporterConfig = Cfg;
 	Ctx.North = N; Ctx.South = S; Ctx.East = E; Ctx.West = W;
 	Ctx.ResolvedZoom = Z;
 	Ctx.MinTileX = MinTX; Ctx.MaxTileX = MaxTX;
 	Ctx.MinTileY = MinTY; Ctx.MaxTileY = MaxTY;
 	Ctx.TotalWorldXCm = TilesX * TileWorldCm;
 	Ctx.TotalWorldYCm = TilesY * TileWorldCm;
-	Ctx.AnchorWorld = Actor->GetActorLocation();
+	Ctx.AnchorWorld = Cfg->ImportOrigin;
 	return Ctx;
 }
 

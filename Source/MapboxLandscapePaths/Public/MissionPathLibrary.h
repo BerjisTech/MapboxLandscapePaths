@@ -4,7 +4,7 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "MissionPathLibrary.generated.h"
 
-class AMapboxLandscapeActor;
+class UMapboxImporterConfig;
 class URoadGraphAsset;
 class UPathDefinition;
 
@@ -17,7 +17,7 @@ struct MAPBOXLANDSCAPEPATHS_API FMapboxLandscapeContext
 	bool bValid = false;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Context")
-	TWeakObjectPtr<AMapboxLandscapeActor> MapboxActor;
+	TWeakObjectPtr<UMapboxImporterConfig> ImporterConfig;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Context")
 	double North = 0.0;
@@ -62,8 +62,8 @@ class MAPBOXLANDSCAPEPATHS_API UMissionPathLibrary : public UBlueprintFunctionLi
 	GENERATED_BODY()
 
 public:
-	// Finds the first AMapboxLandscapeActor in the world and snapshots its current coordinate setup.
-	// Use this every time you need to map lat/lng <-> world, so paths track the actor if you move it.
+	// Snapshots the editor importer's current configuration. Use this every time you need to map
+	// lat/lng <-> world so paths track the importer's ImportOrigin if you move the import area.
 	UFUNCTION(BlueprintCallable, Category = "Mapbox|Paths", meta = (WorldContext = "WorldContextObject"))
 	static FMapboxLandscapeContext GetActiveMapboxContext(const UObject* WorldContextObject);
 
